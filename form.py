@@ -2,8 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
+# In-memory storage for user responses
 responses = []
 
+# Define the questions and options
 questions = [
     {
         "question": "Do you prefer brains well done, medium rare, or rare?",
@@ -27,11 +29,14 @@ questions = [
     }
 ]
 
+# Mapping from option index to letter
+option_map = ['A', 'B', 'C']
+
 @app.route('/')
 def home():
     if len(responses) < len(questions):
         current_question = questions[len(responses)]
-        return render_template('index.html', question=current_question["question"], options=current_question["options"])
+        return render_template('index.html', question=current_question["question"], options=current_question["options"], responses=responses)
     else:
         return redirect(url_for('loading'))
 
@@ -39,8 +44,17 @@ def home():
 def submit():
     response = request.form.get('response')
     if response:
-        responses.append(response)
-        print(f"User response: {response}")  
+        question_index = len(responses)
+        option_index = questions[question_index]["options"].index(response)
+        mapped_response = option_map[option_index]
+        responses.append(mapped_response)
+        print(f"User response: {response} mapped to {mapped_response}")  
+    return redirect(url_for('home'))
+
+@app.route('/back')
+def back():
+    if responses:
+        responses.pop()  # Remove the last response
     return redirect(url_for('home'))
 
 @app.route('/reset')
@@ -52,13 +66,6 @@ def reset():
 @app.route('/loading')
 def loading():
     return render_template('loading.html')
-
-@app.route('/back')
-def back():
-    if responses:
-        responses.pop()  
-    return redirect(url_for('home'))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
