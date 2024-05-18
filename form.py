@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# In-memory storage for user responses
 responses = []
 
 # Define the questions and options
