@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    width: 95vw;
+    height: 95vh;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background-color: rgb(229, 229, 229);
+    width: 340px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-right: 60px;
+}
+
+.picture-button {
+    display: block;
+    margin-top: 10px;
+    width: 320px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #300f76;
+    color: white;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.picture-button:hover {
+    background-color: #000000;
+}
+
+.waiting {
+    animation: blink 2s linear infinite;
+}
+
+@keyframes blink {
+    0% { background-color: #300f76; }
+    50% { background-color: #000000; }
+    100% { background-color: #300f76; }
+}
+
+.match img {
+    width: 340px;
+    height: 326px;
+    object-fit: cover;
+    border-radius: 5px;
+}

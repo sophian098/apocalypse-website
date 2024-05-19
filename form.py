@@ -33,11 +33,16 @@ option_map = ['A', 'B', 'C']
 
 @app.route('/')
 def home():
+    print(responses)
     if len(responses) < len(questions):
         current_question = questions[len(responses)]
         return render_template('index.html', question=current_question["question"], options=current_question["options"], responses=responses)
     else:
-        return redirect(url_for('loading'))
+        return redirect(url_for('profile'))
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
