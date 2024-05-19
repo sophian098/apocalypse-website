@@ -51,3 +51,9 @@
     object-fit: cover;
     border-radius: 5px;
 }
+
+.reset-link {
+    position:absolute;
+    left: 10px;
+    bottom: 10px;
+}
