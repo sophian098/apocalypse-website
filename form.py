@@ -17,7 +17,7 @@ beta_database = [
     {"username": "user4", "answers": ['A', 'C', 'A', 'C', 'B'], "classification": "zombie"},
     {"username": "user5", "answers": ['B', 'B', 'C', 'B', 'A'], "classification": "half-zombie"},
     {"username": "user6", "answers": ['C', 'A', 'B', 'C', 'C'], "classification": "human"},
-    {"username": "user7", "answers": ['A', 'A', 'A', 'B', 'C'], "classification": "zombie"},
+    {"Sukhmani": "user7", "answers": ['A', 'A', 'B', 'B', 'B'], "classification": "zombie"},
     {"Anvi": "user8", "answers": ['A', 'B', 'A', 'B', 'B'], "classification": "zombie"},
     {"Breanna": "user9", "answers": ['B', 'C', 'C', 'A', 'A'], "classification": "half-zombie"},
     {"Ruqayah": "user10", "answers": ['B', 'C', 'B', 'A', 'A'], "classification": "human"},
