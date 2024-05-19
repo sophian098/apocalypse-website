@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Your Match:</h1>
+    {% if best_match %}
+    <h2>{{ best_match["username"] }}</h2>
+    <p>Classification: {{ best_match["classification"] }}</p>
+    {% else %}
+    <p>No match found.</p>
+    {% endif %}
+    <form action="{{ url_for('reset') }}" method="get">
+        <button class="reset-button" type="submit">Reset Questions</button>
+    </form>
+    <!-- <p>Your Classification: {{ classification }}</p>
+    <p>Answers: {{ best_match["answers"] }}</p> -->
+</body>
+</html>
