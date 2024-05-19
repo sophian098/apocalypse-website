@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results</title>
+    <title>Your zomBAE</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Your Match:</h1>
-    {% if best_match %}
-    <h2>{{ best_match["username"] }}</h2>
-    <p>Classification: {{ best_match["classification"] }}</p>
-    {% else %}
-    <p>No match found.</p>
-    {% endif %}
-    <form action="{{ url_for('reset') }}" method="get">
-        <button class="reset-button" type="submit">Reset Questions</button>
-    </form>
-    <!-- <p>Your Classification: {{ classification }}</p>
-    <p>Answers: {{ best_match["answers"] }}</p> -->
+    <div class="content">
+        <div class="container">
+            <h1>You are classified as a {{ classification }}</h1>
+            <div class="centeredobj">
+                <img src="{{ url_for('static', filename='/apocalypse-photos/' + best_match['classification'] + '.jpg') }}" alt="type" width="100">
+            </div>
+            <h2>Your best match is {{ best_match['username'] }}</h2>
+            <img src="{{ url_for('static', filename='/apocalypse-photos/' + best_match['username'] + '.jpg') }}" alt="profilepic">
+        </div>
+        <div class="reset-button-container">
+            <form action="{{ url_for('reset') }}" method="get">
+                <button type="submit">Reset</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
