@@ -67,6 +67,7 @@ def find_best_match(user_responses):
 
 @app.route('/')
 def home():
+    print(responses)
     if len(responses) < len(questions):
         current_question = questions[len(responses)]
         return render_template('index.html', question=current_question["question"], options=current_question["options"], responses=responses)
@@ -75,6 +76,11 @@ def home():
             classify_user()
         best_match = find_best_match(responses)
         return render_template('result.html', classification=user_classification, best_match=best_match)
+        return redirect(url_for('profile'))
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 @app.route('/submit', methods=['POST'])
 def submit():
