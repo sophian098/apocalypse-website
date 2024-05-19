@@ -13,7 +13,7 @@
             <button id="picture-button" class="picture-button" onclick="stop()">Take Picture</button>
         </div>
         <div class="match">
-            <img src="{{ url_for('static', filename='images/people/tree.jpg')}}" alt="">
+            <img id="match-img" src="{{ url_for('static', filename='apocalypse-photos/half-zombie.jpg') }}" alt="">
         </div>
     </div>
     <!-- <button onclick="play()">Play</button> -->
@@ -35,6 +35,7 @@
         let stopped = false;
         let dotsCount = 0;
         let tick = 0;
+        let showingResult = false;
 
         // Load the model first
         function preload() {
@@ -76,13 +77,23 @@
                     for (let i=0; i<dotsCount; ++i) {
                         label += ". ";
                     }
-                } else {
+                } else if (!showingResult) {
                     label = result;
                     let pictureButton = document.getElementById("picture-button");
                     pictureButton.innerText = "Waiting for match...";
                     pictureButton.classList.add("waiting");
+                    setTimeout(showResult, 5000)
                 }
             }
+        }
+
+        function showResult() {
+            let pictureButton = document.getElementById("picture-button");
+            pictureButton.innerText = "Your ZOM-BAE is {{ person_name }} <33";
+            pictureButton.classList.remove("waiting");
+            let matchImg = document.getElementById("match-img");
+            matchImg.src = "{{ image_path }}";
+            showingResult = true;
         }
 
         // Get a prediction for the current video frame

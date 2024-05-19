@@ -6,6 +6,8 @@ app = Flask(__name__)
 # In-memory storage for user responses and classification
 responses = []
 user_classification = None
+image_path = ""
+best_match_data = None
 
 # Predefined sample dataset with 21 users
 sample_database = [
@@ -35,6 +37,7 @@ option_map = ['A', 'B', 'C']
 
 @app.route('/')
 def home():
+    global image_path, best_match_data
     if len(responses) < len(questions):
         current_question = questions[len(responses)]
         return render_template('index.html', question=current_question["question"], options=current_question["options"], responses=responses)
@@ -42,9 +45,16 @@ def home():
         if user_classification is None:
             classify_user()
         best_match = find_best_match(responses)
-        image_path = f'static/apocalypse-photos/{best_match["classification"]}.jpg'
+        print(responses, best_match)
+        best_match_data = best_match
+        image_path = f'static/apocalypse-photos/{best_match["username"]}.jpg'
         print(f"Attempting to access image at: {image_path}")
-        return render_template('result.html', classification=user_classification, best_match=best_match, image_path=image_path)
+        return redirect(url_for('profile'))
+        # return render_template('result.html', classification=user_classification, best_match=best_match, image_path=image_path)
+
+@app.route('/profile')
+def profile():
+    return render_template('profile.html', image_path=image_path, person_name=best_match_data["username"])
 
 
 def classify_user():
