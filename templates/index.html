@@ -7,18 +7,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>{{ question }}</h1>
-    <form action="{{ url_for('submit') }}" method="POST">
-        <div class="buttons">
-            {% for option in options %}
-                <button type="submit" name="response" value="{{ option }}">{{ option }}</button>
-            {% endfor %}
+    <div class="windowframe">
+        <div class="windowheader">
+            <p>WHO IS YOUR ZOM-BAE?  <33</p>
         </div>
-    </form>
-    {% if responses %}
-    <form action="{{ url_for('back') }}" method="get">
-        <button class="back-button" type="submit">Go Back</button>
-    </form>
-    {% endif %}
+        <div class="windowscreen">
+            <p>{{ question }}</p>
+        </div>
+        <form action="{{ url_for('submit') }}" method="POST">
+            <div class="buttons-container">
+                {% for option in options %}
+                    <button class="button" type="submit" name="response" value="{{ option }}">{{ option }}</button>
+                {% endfor %}
+            </div>
+        </form>
+        {% if responses %}
+        <form action="{{ url_for('back') }}" method="get">
+            <button class="back-button" type="submit">Go Back</button>
+        </form>
+        {% endif %}
+    </div>
 </body>
 </html>
